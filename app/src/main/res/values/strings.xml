@@ -1,4 +1,31 @@
 <resources>
     <string name="app_name">ColorBlenderAmazing2</string>
     <string name="action_settings">Settings</string>
+    <string name="blue_number">Blue Number</string>
+    <string name="green_number">Green Number</string>
+        <string name="red_number">Red Number</string>
+        <string name="red">Red</string>
+        <string name="green">Green</string>
+        <string name="blue">Blue</string>
+        <string name="no_text"> </string>
+        <string name="color_picker">Color Picker</string>
+        <string name="save">Save</string>
+        <string name="restore">Restore</string>
+        <string name="close_me">Close Me</string>
+        <string name="settings">Settings</string>
+        <string name="saved_color_8">Saved Color 8</string>
+        <string name="saved_color_7">Saved Color 7</string>
+        <string name="saved_color_6">Saved Color 6</string>
+        <string name="saved_color_5">Saved Color 5</string>
+        <string name="saved_color_4">Saved Color 4</string>
+        <string name="saved_color_3">Saved Color 3</string>
+        <string name="saved_color_2">Saved Color 2</string>
+        <string name="saved_color_1">Saved Color 1</string>
+        <string name="set_color_1">Set Color 1</string>
+        <string name="set_color_2">Set Color 2</string>
+        <string name="choose">Choose</string>
+        <string name="custom_color_name">Custom Color Name</string>
+        <string name="name">Name</string>
+        <string name="icon_of_the_un_credit_to_the_un_i_guess">Icon of the Un credit to... the UN I guess</string>
+        <string name="choose_color">Choose Color</string>
 </resources>
