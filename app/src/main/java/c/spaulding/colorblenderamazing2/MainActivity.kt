@@ -1,5 +1,7 @@
 package c.spaulding.colorblenderamazing2
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -26,8 +28,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         colorMixBar.max = hundred
 
+        val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        setBackgroundWSharedPref(sharedPreferences)
+
         colorView.setBackgroundColor(Color.argb(alpha,redOne,blueOne,greenOne))
 
+        setBackgroundOnSlider()
+
+    }
+
+    private fun saveColorsInSharedPrefs(sharedPreferences: SharedPreferences){
+        val editor = sharedPreferences.edit()
+        editor.putInt("redOne", 0)
+        editor.putInt("blueOne", 0)
+        editor.putInt("greenOne", 0)
+        editor.putInt("redTwo", 255)
+        editor.putInt("blueTwo", 255)
+        editor.putInt("greenTwo", 255)
+    }
+
+    private fun setBackgroundOnSlider() {
         colorMixBar?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -36,27 +56,20 @@ class MainActivity : AppCompatActivity() {
                     100 -> colorView.setBackgroundColor(Color.argb(alpha, redTwo, greenTwo, blueTwo))
                     0 -> colorView.setBackgroundColor(Color.argb(alpha, redOne, greenOne, blueOne))
                     else -> colorView.setBackgroundColor(Color.argb(alpha,
-                            ((redTwo*colorMixBar.progress/100)+(redOne*(100-colorMixBar.progress)/100)),
-                            ((greenTwo*colorMixBar.progress/100)+(greenOne*(100-colorMixBar.progress)/100)),
-                            ((blueTwo*colorMixBar.progress/100)+(blueOne*(100-colorMixBar.progress)/100))))
+                            ((redTwo * colorMixBar.progress / 100) + (redOne * (100 - colorMixBar.progress) / 100)),
+                            ((greenTwo * colorMixBar.progress / 100) + (greenOne * (100 - colorMixBar.progress) / 100)),
+                            ((blueTwo * colorMixBar.progress / 100) + (blueOne * (100 - colorMixBar.progress) / 100))))
                 }
             }
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun setBackgroundWSharedPref(sharedPreferences: SharedPreferences) {
+        redOne = sharedPreferences.getInt("redOne", 0)
+        blueOne = sharedPreferences.getInt("blueOne", 0)
+        greenOne = sharedPreferences.getInt("greenOne", 0)
+        redTwo = sharedPreferences.getInt("redTwo", 255)
+        blueTwo = sharedPreferences.getInt("blueTwo", 255)
+        greenTwo = sharedPreferences.getInt("greenTwo", 255)
     }
 }
