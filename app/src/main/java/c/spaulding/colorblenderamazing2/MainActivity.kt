@@ -92,17 +92,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openColorPickerApp( requestCode: Int, side : Int){
-        val launchColorPicker = packageManager.getLaunchIntentForPackage("c.ebookfrenzy.colorpicker")  as Intent
-        if (launchColorPicker != null) {
-            launchColorPicker.putExtra("side", side)
-            startActivityForResult(launchColorPicker, requestCode)
-        } else {
-            // Bring user to the market or let them choose an app?
-            intent = Intent(Intent.ACTION_VIEW)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.data = Uri.parse("market://details?id=" + packageName)
-            startActivity(intent);
-        }
+        val launchColorPicker: Intent = Intent()
+        launchColorPicker.action = "c.ebookfrenzy.colorpicker"
+        launchColorPicker.putExtra("side", side)
+        startActivityForResult(launchColorPicker, requestCode)
     }
 
     fun getNewColorsWithIntents() {
