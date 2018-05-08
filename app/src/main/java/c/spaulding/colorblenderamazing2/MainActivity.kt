@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
 
         setBackgroundWSharedPref(sharedPreferences)
-        getNewColorsWithIntents()
         saveColorsInSharedPrefs(sharedPreferences)
 
         colorView.setBackgroundColor(Color.argb(alpha,redOne,blueOne,greenOne))
@@ -98,19 +97,22 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(launchColorPicker, requestCode)
     }
 
-    fun getNewColorsWithIntents() {
-        if(intent == null){
-            Log.i("nullIntent", "NO INTENTS PASSED ~HULK")
+    fun getNewColorsWithIntents(data: Intent?) {
+        if(data?.getIntExtra("side", 0) == 1){
+            Log.i("colorSide1", "SMASH COLOR 1 ~HULK")
+            redOne = data?.getIntExtra("red", 0)
+            blueOne = data?.getIntExtra("blue", 0)
+            greenOne = data?.getIntExtra("green", 0)
         }
-        else if(intent.getIntExtra("side", 0) == 1){
-            redOne = intent.getIntExtra("red", 0)
-            blueOne = intent.getIntExtra("blue", 0)
-            greenOne = intent.getIntExtra("green", 0)
+        else if (data?.getIntExtra("side", 0) == 2){
+            Log.i("colorSide2", "SMASH COLOR 2 ~HULK")
+            redTwo = data?.getIntExtra("red", 0)
+            blueTwo = data?.getIntExtra("blue", 0)
+            greenTwo = data?.getIntExtra("green", 0)
         }
-        else if (intent.getIntExtra("side", 0) == 2){
-            redTwo = intent.getIntExtra("red", 0)
-            blueTwo = intent.getIntExtra("blue", 0)
-            greenTwo = intent.getIntExtra("green", 0)
-        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        getNewColorsWithIntents(data)
     }
 }
